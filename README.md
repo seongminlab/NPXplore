@@ -1,4 +1,8 @@
-# NPXplore 1.0.0
+<h1 align="center">NPXplore 1.0.0</h1>
+
+<p align="center">
+  <img src="docs/images/NPXplore-logo.png" alt="NPXplore logo" width="300">
+</p>
 
 <br>
 
