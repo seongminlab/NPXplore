@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.*\.Rcheck$
+^NPXplore_.*\.tar\.gz$
+^\.DS_Store$
+
+^example$
+^docs$
+^LICENSE$
+^\.git$
+^\.gitignore$
+^output.*$

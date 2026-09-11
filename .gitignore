@@ -1,0 +1,13 @@
+.DS_Store
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+*.Rcheck/
+*.tar.gz
+Rplots.pdf
+output*/
+NPXplore_output*/
+log/
+.Renviron
+.Renviron.*

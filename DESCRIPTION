@@ -1,0 +1,42 @@
+Package: NPXplore
+Type: Package
+Title: Reproducible Olink NPX Exploration and Differential Analysis
+Version: 1.0.0
+Authors@R: person("Seongmin", "Cheon", email = "seongmin@knuh.kr", role = c("aut", "cre"))
+Author: Seongmin Cheon [aut, cre]
+Maintainer: Seongmin Cheon <seongmin@knuh.kr>
+Description: Provides a reproducible pipeline for reading and cleaning Olink NPX data,
+    joining metadata, generating QC summaries, and selecting two-condition or
+    multi-condition analyses.
+License: AGPL-3
+Encoding: UTF-8
+Depends:
+    R (>= 4.1.0)
+Roxygen: list(markdown = TRUE)
+Imports:
+    dplyr,
+    OlinkAnalyze,
+    readxl,
+    tibble,
+    tidyr
+VignetteBuilder: knitr
+Suggests:
+    knitr,
+    markdown,
+    enrichR,
+    openxlsx,
+    ggplot2,
+    ggraph,
+    htmlwidgets,
+    ggtext,
+    scales,
+    pheatmap,
+    plotly,
+    igraph,
+    STRINGdb,
+    testthat (>= 3.0.0),
+    umap,
+    visNetwork,
+    NbClust
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0

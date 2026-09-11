@@ -1,0 +1,28 @@
+test_that("saved heatmaps reserve the full annotation legend width", {
+  skip_if_not_installed("pheatmap")
+  d <- expand.grid(SampleID = paste0("S", 1:9), Assay = paste0("A", 1:4))
+  d$NPX <- seq_len(nrow(d))
+  labels <- c("Healthy", paste(rep("W", 25), collapse = ""),
+    "A very long sample group name with several words")
+  d$Condition <- rep(rep(labels, each = 3), 4)
+  out <- tempfile(fileext = ".pdf")
+  result <- npx_heatmap(d, filename = out, width = 6, height = 5)
+  expect_true(file.exists(out))
+  expect_setequal(as.character(result$annotation$Condition), labels)
+  gt <- result$plot$gtable
+  grDevices::pdf(NULL, width = result$plot$width, height = result$plot$height)
+  on.exit(grDevices::dev.off(), add = TRUE)
+  grid::pushViewport(gt$vp)
+  index <- which(gt$layout$name == "annotation_legend")
+  children <- as.list(gt$grobs[[index]]$children)
+  needed <- max(vapply(children, function(g) {
+    if (!inherits(g, "text")) return(0)
+    grid::convertWidth(g$x + grid::grobWidth(g), "inches", valueOnly = TRUE)
+  }, numeric(1)))
+  reserved <- grid::convertWidth(gt$widths[gt$layout$l[index]], "inches", valueOnly = TRUE)
+  expect_gt(reserved, needed)
+  expect_true(all(grid::convertWidth(gt$widths, "inches", valueOnly = TRUE) >= 0))
+  expect_gte(result$plot$width, sum(grid::convertWidth(gt$widths, "inches", valueOnly = TRUE)))
+  expect_gt(result$plot$width, 6)
+  grid::popViewport()
+})
