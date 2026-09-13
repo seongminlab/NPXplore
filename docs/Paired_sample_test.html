@@ -112,6 +112,12 @@ section.footnotes {
 }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xiee/utils/css/prism-xcode.min.css">
+<style id="npx-example-style">
+.npx-examples {margin:2rem 0 3rem; padding:1rem; background:#f7f9fc; border:1px solid #dbe2ea; border-radius:8px;}
+.npx-examples figure {margin:1.5rem 0; background:white; padding:1rem;}
+.npx-examples img {display:block; width:100%; max-width:850px; height:auto; margin:auto;}
+.npx-examples figcaption {margin-top:0.8rem; text-align:center;}
+</style>
 </head>
 <body>
 <div class="frontmatter">
@@ -160,6 +166,15 @@ NPXplore::npx_distribution_boxplot(
   prepared$data, variable = &quot;Condition&quot;, output_dir = &quot;output_Condition/Results/Distribution&quot;
 )
 </code></pre>
+<!-- NPX EXAMPLES 2 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/QC/UMAP_QC_status.pdf"><img src="images/examples/Paired_sample_test-2-0.png" alt="QC status UMAP" loading="lazy"></a><figcaption>QC status UMAP · <a href="../example/Paired_sample_test/QC/UMAP_QC_status.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/Distribution/IQRplot.pdf"><img src="images/examples/Paired_sample_test-2-1.png" alt="Sample IQR" loading="lazy"></a><figcaption>Sample IQR · <a href="../example/Paired_sample_test/Results/Distribution/IQRplot.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/Distribution/boxplot.pdf"><img src="images/examples/Paired_sample_test-2-2.png" alt="Sample NPX distributions" loading="lazy"></a><figcaption>Sample NPX distributions · <a href="../example/Paired_sample_test/Results/Distribution/boxplot.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:3-save-npx-table">3. Save NPX table</h2>
 <p>Save the original metadata-matched assay data and the cleaned NPX matrix under <code>Tables</code>. Only the exported matrix uses assay-median imputation; statistical analysis still uses <code>prepared$data</code>.</p>
 <pre><code class="language-r">NPXplore::npx_export_tables(
@@ -198,6 +213,13 @@ analysis &lt;- NPXplore::npx_wilcox(
   output_dir = &quot;output_Condition&quot;, save_npx = FALSE
 )
 </code></pre>
+<!-- NPX EXAMPLES 4 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/DEPs/VolcanoPlot/Volcano_plot.pdf"><img src="images/examples/Paired_sample_test-4-0.png" alt="Volcano plot" loading="lazy"></a><figcaption>Volcano plot · <a href="../example/Paired_sample_test/Results/DEPs/VolcanoPlot/Volcano_plot.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:5-clustering-analysis">5. Clustering analysis</h2>
 <p>Not required for this two-group workflow. GO separates positive and negative Log2FC DEPs, and PPI uses all DEPs. Continue to UMAP.</p>
 <h2 id="sec:6-umap">6. UMAP</h2>
@@ -206,6 +228,13 @@ analysis &lt;- NPXplore::npx_wilcox(
 NPXplore::npx_save_plot(umap, &quot;output_Condition/Results/UMAP/UMAP.pdf&quot;)
 NPXplore::npx_save_plot(umap, &quot;output_Condition/Results/UMAP/UMAP.png&quot;)
 </code></pre>
+<!-- NPX EXAMPLES 6 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/UMAP/UMAP.pdf"><img src="images/examples/Paired_sample_test-6-0.png" alt="Analysis UMAP" loading="lazy"></a><figcaption>Analysis UMAP · <a href="../example/Paired_sample_test/Results/UMAP/UMAP.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:7-heatmap">7. Heatmap</h2>
 <h3 id="sec:all-assays">All assays</h3>
 <p>Plot NPX values without row-wise standardization, then save the heatmap.</p>
@@ -226,6 +255,15 @@ NPXplore::npx_save_plot(heatmap_deps, &quot;output_Condition/Results/DEPs/DEPs_h
   output_dir = &quot;output_Condition/Results/DEPs/Heatmap_Pathway&quot;
 )
 </code></pre>
+<!-- NPX EXAMPLES 7 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/Heatmap/Heatmap_NPX.pdf"><img src="images/examples/Paired_sample_test-7-0.png" alt="All-assay heatmap" loading="lazy"></a><figcaption>All-assay heatmap · <a href="../example/Paired_sample_test/Results/Heatmap/Heatmap_NPX.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/DEPs/DEPs_heatmap.pdf"><img src="images/examples/Paired_sample_test-7-1.png" alt="DEP heatmap" loading="lazy"></a><figcaption>DEP heatmap · <a href="../example/Paired_sample_test/Results/DEPs/DEPs_heatmap.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf"><img src="images/examples/Paired_sample_test-7-2.png" alt="Example pathway: Autophagy" loading="lazy"></a><figcaption>Example pathway: Autophagy · <a href="../example/Paired_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:8-boxplot-for-each-assays">8. Boxplot for each Assays</h2>
 <p>Save individual plots for all assays. This can take considerable time on large panels.</p>
 <pre><code class="language-r">NPXplore::npx_dep_boxplot(
@@ -234,6 +272,14 @@ NPXplore::npx_save_plot(heatmap_deps, &quot;output_Condition/Results/DEPs/DEPs_h
 )
 </code></pre>
 <p>To save only DEP assays instead, add <code>assays = analysis$deps$Assay</code> to the call above.</p>
+<!-- NPX EXAMPLES 8 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/DEPs/Boxplot/ANKZF1_boxplot.pdf"><img src="images/examples/Paired_sample_test-8-0.png" alt="Example assay: ANKZF1" loading="lazy"></a><figcaption>Example assay: ANKZF1 · <a href="../example/Paired_sample_test/Results/DEPs/Boxplot/ANKZF1_boxplot.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/DEPs/Boxplot/CDC37_boxplot.pdf"><img src="images/examples/Paired_sample_test-8-1.png" alt="Example assay: CDC37" loading="lazy"></a><figcaption>Example assay: CDC37 · <a href="../example/Paired_sample_test/Results/DEPs/Boxplot/CDC37_boxplot.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:9-gene-ontology-analysis">9. Gene Ontology analysis</h2>
 <p>Analyze positive and negative Log2FC DEPs separately. GO/KEGG queries send selected protein identifiers to Enrichr. The function saves tables and plots under <code>Results/GeneOntology</code>.</p>
 <p>Select the top 10 terms by Combined Score among terms with adjusted p-value &lt;= 0.05; display those terms in descending GeneRatio order.</p>
@@ -245,6 +291,14 @@ functional$status
 functional$diagnostics
 </code></pre>
 <p>The diagnostics distinguish empty inputs, no significant terms, server/query errors, and output errors.</p>
+<!-- NPX EXAMPLES 9 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/GeneOntology/up_regulated_GO_Biological_Process.pdf"><img src="images/examples/Paired_sample_test-9-0.png" alt="Up-regulated DEPs: biological process" loading="lazy"></a><figcaption>Up-regulated DEPs: biological process · <a href="../example/Paired_sample_test/Results/GeneOntology/up_regulated_GO_Biological_Process.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/GeneOntology/down_regulated_GO_Biological_Process.pdf"><img src="images/examples/Paired_sample_test-9-1.png" alt="Down-regulated DEPs: biological process" loading="lazy"></a><figcaption>Down-regulated DEPs: biological process · <a href="../example/Paired_sample_test/Results/GeneOntology/down_regulated_GO_Biological_Process.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 <h2 id="sec:10-protein-protein-interaction">10. Protein-Protein Interaction</h2>
 <p>Create and save STRING networks for all DEPs. Pathway networks use the same annotation as the pathway heatmaps.</p>
 <pre><code class="language-r">ppi &lt;- NPXplore::npx_ppi_network(
@@ -256,6 +310,14 @@ ppi$summary
 </code></pre>
 <p>All-DEP and pathway networks color nodes by Log2FC.</p>
 <p>Networks and node/edge tables are saved under <code>Results/STRING_PPI</code>; pathway outputs are under <code>Results/STRING_PPI/Pathways</code>. The summary distinguishes insufficient mapping, absent interactions, query failures, and export failures.</p>
+<!-- NPX EXAMPLES 10 -->
+<section class="npx-examples" aria-label="Example outputs">
+<h3>Example outputs</h3>
+<p>Selected figures from the supplied demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.</p>
+<figure><a href="../example/Paired_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf"><img src="images/examples/Paired_sample_test-10-0.png" alt="All-DEP STRING network" loading="lazy"></a><figcaption>All-DEP STRING network · <a href="../example/Paired_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf">Open PDF</a></figcaption></figure>
+<figure><a href="../example/Paired_sample_test/Results/STRING_PPI/Pathways/Autophagy/Autophagy_DEPs_STRING.pdf"><img src="images/examples/Paired_sample_test-10-1.png" alt="Example pathway STRING network: Autophagy" loading="lazy"></a><figcaption>Example pathway STRING network: Autophagy · <a href="../example/Paired_sample_test/Results/STRING_PPI/Pathways/Autophagy/Autophagy_DEPs_STRING.pdf">Open PDF</a></figcaption></figure>
+</section>
+<!-- END NPX EXAMPLES -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>

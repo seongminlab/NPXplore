@@ -57,7 +57,7 @@ GO/KEGG analysis requires an internet connection to Enrichr and submits selected
 install.packages("remotes")
 remotes::install_github(
   "seongminlab/NPXplore",
-  dependencies = TRUE, build_vignettes = TRUE, upgrade = "never"
+  dependencies = TRUE, build_vignettes = TRUE
 )
 ```
 
@@ -71,11 +71,10 @@ Use this as an alternative to remotes:
 install.packages("devtools")
 devtools::install_github(
   "seongminlab/NPXplore",
-  dependencies = TRUE, build_vignettes = TRUE, upgrade = "never"
+  dependencies = TRUE, build_vignettes = TRUE
 )
 ```
 
-The installation examples include suggested packages and build the step-by-step vignettes. See the [remotes installation reference](https://remotes.r-lib.org/reference/install_github.html).
 
 <br>
 
@@ -91,10 +90,12 @@ cd NPXplore
 To install this local checkout, start R from the repository root:
 
 ```r
-remotes::install_local(".", dependencies = TRUE, build_vignettes = TRUE, upgrade = "never")
+remotes::install_local("./NPXplore", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
 The `example/` directory is included in the GitHub checkout. It is excluded from the installed R package to avoid bundling the large input file; clone or download the repository to follow the examples.
+
+> **Caution:** The `example/NPXfile.parquet` file contains artificially generated data and must not be used for research. The information in `example/metadata.csv` is demo data and does not represent real individuals or actual observations.
 
 <br>
 
