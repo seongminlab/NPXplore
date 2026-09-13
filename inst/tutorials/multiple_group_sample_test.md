@@ -58,6 +58,22 @@ NPXplore::npx_distribution_boxplot(
 )
 ```
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![QC status UMAP](../../docs/images/examples/multiple_group_sample_test-2-0.png)](../../example/multiple_group_sample_test/QC/UMAP_QC_status.pdf)
+
+QC status UMAP · [Open PDF](../../example/multiple_group_sample_test/QC/UMAP_QC_status.pdf)
+
+[![Sample IQR](../../docs/images/examples/multiple_group_sample_test-2-1.png)](../../example/multiple_group_sample_test/Results/Distribution/IQRplot.pdf)
+
+Sample IQR · [Open PDF](../../example/multiple_group_sample_test/Results/Distribution/IQRplot.pdf)
+
+[![Sample NPX distributions](../../docs/images/examples/multiple_group_sample_test-2-2.png)](../../example/multiple_group_sample_test/Results/Distribution/boxplot.pdf)
+
+Sample NPX distributions · [Open PDF](../../example/multiple_group_sample_test/Results/Distribution/boxplot.pdf)
+
 ## 3. Save NPX table
 
 Save the original metadata-matched assay data and the cleaned NPX matrix under `Tables`. Only the exported matrix uses assay-median imputation; statistical analysis still uses `prepared$data`.
@@ -138,6 +154,18 @@ NPXplore::npx_cluster_lineplot(
 
 If clustering cannot run, omit cluster plots and cluster-specific GO. For all-DEP PPI, use `cluster_result = NULL` in step 10; cluster-dependent outputs will be reported as unavailable.
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![DEP cluster heatmap](../../docs/images/examples/multiple_group_sample_test-5-0.png)](../../example/multiple_group_sample_test/Results/DEPs/Clustering/DEPs_cluster_heatmap.pdf)
+
+DEP cluster heatmap · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/Clustering/DEPs_cluster_heatmap.pdf)
+
+[![DEP cluster profiles](../../docs/images/examples/multiple_group_sample_test-5-1.png)](../../example/multiple_group_sample_test/Results/DEPs/Clustering/DEPs_Cluster_Lineplot.pdf)
+
+DEP cluster profiles · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/Clustering/DEPs_Cluster_Lineplot.pdf)
+
 ## 6. UMAP
 
 Calculate UMAP from the cleaned analysis data and save it.
@@ -147,6 +175,14 @@ umap <- NPXplore::npx_umap(prepared$data, variable = "Group")
 NPXplore::npx_save_plot(umap, "output_Group/Results/UMAP/UMAP.pdf")
 NPXplore::npx_save_plot(umap, "output_Group/Results/UMAP/UMAP.png")
 ```
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Analysis UMAP](../../docs/images/examples/multiple_group_sample_test-6-0.png)](../../example/multiple_group_sample_test/Results/UMAP/UMAP.pdf)
+
+Analysis UMAP · [Open PDF](../../example/multiple_group_sample_test/Results/UMAP/UMAP.pdf)
 
 ## 7. Heatmap
 
@@ -181,6 +217,22 @@ NPXplore::npx_pathway_heatmaps(
 )
 ```
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![All-assay heatmap](../../docs/images/examples/multiple_group_sample_test-7-0.png)](../../example/multiple_group_sample_test/Results/Heatmap/Heatmap_NPX.pdf)
+
+All-assay heatmap · [Open PDF](../../example/multiple_group_sample_test/Results/Heatmap/Heatmap_NPX.pdf)
+
+[![DEP heatmap](../../docs/images/examples/multiple_group_sample_test-7-1.png)](../../example/multiple_group_sample_test/Results/DEPs/DEPs_heatmap.pdf)
+
+DEP heatmap · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/DEPs_heatmap.pdf)
+
+[![Example pathway: Autophagy](../../docs/images/examples/multiple_group_sample_test-7-2.png)](../../example/multiple_group_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf)
+
+Example pathway: Autophagy · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf)
+
 ## 8. Boxplot for each Assays
 
 Save individual plots for all assays. This can take considerable time on large panels.
@@ -193,6 +245,18 @@ NPXplore::npx_dep_boxplot(
 ```
 
 To save only DEP assays instead, add `assays = analysis$deps$Assay` to the call above.
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Example assay: ACP1](../../docs/images/examples/multiple_group_sample_test-8-0.png)](../../example/multiple_group_sample_test/Results/DEPs/Boxplot/ACP1_boxplot.pdf)
+
+Example assay: ACP1 · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/Boxplot/ACP1_boxplot.pdf)
+
+[![Example assay: AK1](../../docs/images/examples/multiple_group_sample_test-8-1.png)](../../example/multiple_group_sample_test/Results/DEPs/Boxplot/AK1_boxplot.pdf)
+
+Example assay: AK1 · [Open PDF](../../example/multiple_group_sample_test/Results/DEPs/Boxplot/AK1_boxplot.pdf)
 
 ## 9. Gene Ontology analysis
 
@@ -211,6 +275,18 @@ functional$diagnostics
 
 The diagnostics distinguish empty inputs, no significant terms, server/query errors, and output errors.
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Cluster 1: biological process](../../docs/images/examples/multiple_group_sample_test-9-0.png)](../../example/multiple_group_sample_test/Results/GeneOntology/Cluster_1/Cluster_1_GO_Biological_Process.pdf)
+
+Cluster 1: biological process · [Open PDF](../../example/multiple_group_sample_test/Results/GeneOntology/Cluster_1/Cluster_1_GO_Biological_Process.pdf)
+
+[![Cluster 2: biological process](../../docs/images/examples/multiple_group_sample_test-9-1.png)](../../example/multiple_group_sample_test/Results/GeneOntology/Cluster_2/Cluster_2_GO_Biological_Process.pdf)
+
+Cluster 2: biological process · [Open PDF](../../example/multiple_group_sample_test/Results/GeneOntology/Cluster_2/Cluster_2_GO_Biological_Process.pdf)
+
 ## 10. Protein-Protein Interaction
 
 Create and save STRING networks for all DEPs and each expression cluster. Pathway networks use the same annotation as the pathway heatmaps.
@@ -227,3 +303,16 @@ ppi$summary
 All-DEP and cluster networks color nodes by `-log10(adjusted p-value)`. Pathway networks color nodes by cluster number.
 
 Networks and node/edge tables are saved under `Results/STRING_PPI`; pathway outputs are under `Results/STRING_PPI/Pathways`. The summary distinguishes insufficient mapping, absent interactions, query failures, and export failures.
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![All-DEP STRING network](../../docs/images/examples/multiple_group_sample_test-10-0.png)](../../example/multiple_group_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf)
+
+All-DEP STRING network · [Open PDF](../../example/multiple_group_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf)
+
+[![Example cluster STRING network: Cluster 1](../../docs/images/examples/multiple_group_sample_test-10-1.png)](../../example/multiple_group_sample_test/Results/STRING_PPI/Cluster_1/Cluster1_DEPs_STRING.pdf)
+
+Example cluster STRING network: Cluster 1 · [Open PDF](../../example/multiple_group_sample_test/Results/STRING_PPI/Cluster_1/Cluster1_DEPs_STRING.pdf)
+

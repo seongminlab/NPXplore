@@ -58,6 +58,22 @@ NPXplore::npx_distribution_boxplot(
 )
 ```
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![QC status UMAP](../../docs/images/examples/Paired_sample_test-2-0.png)](../../example/Paired_sample_test/QC/UMAP_QC_status.pdf)
+
+QC status UMAP · [Open PDF](../../example/Paired_sample_test/QC/UMAP_QC_status.pdf)
+
+[![Sample IQR](../../docs/images/examples/Paired_sample_test-2-1.png)](../../example/Paired_sample_test/Results/Distribution/IQRplot.pdf)
+
+Sample IQR · [Open PDF](../../example/Paired_sample_test/Results/Distribution/IQRplot.pdf)
+
+[![Sample NPX distributions](../../docs/images/examples/Paired_sample_test-2-2.png)](../../example/Paired_sample_test/Results/Distribution/boxplot.pdf)
+
+Sample NPX distributions · [Open PDF](../../example/Paired_sample_test/Results/Distribution/boxplot.pdf)
+
 ## 3. Save NPX table
 
 Save the original metadata-matched assay data and the cleaned NPX matrix under `Tables`. Only the exported matrix uses assay-median imputation; statistical analysis still uses `prepared$data`.
@@ -121,6 +137,14 @@ NPXplore::npx_export_tables(
 )
 ```
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Volcano plot](../../docs/images/examples/Paired_sample_test-4-0.png)](../../example/Paired_sample_test/Results/DEPs/VolcanoPlot/Volcano_plot.pdf)
+
+Volcano plot · [Open PDF](../../example/Paired_sample_test/Results/DEPs/VolcanoPlot/Volcano_plot.pdf)
+
 ## 5. Clustering analysis
 
 Not required for this two-group workflow. GO separates positive and negative Log2FC DEPs, and PPI uses all DEPs. Continue to UMAP.
@@ -134,6 +158,14 @@ umap <- NPXplore::npx_umap(prepared$data, variable = "Condition")
 NPXplore::npx_save_plot(umap, "output_Condition/Results/UMAP/UMAP.pdf")
 NPXplore::npx_save_plot(umap, "output_Condition/Results/UMAP/UMAP.png")
 ```
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Analysis UMAP](../../docs/images/examples/Paired_sample_test-6-0.png)](../../example/Paired_sample_test/Results/UMAP/UMAP.pdf)
+
+Analysis UMAP · [Open PDF](../../example/Paired_sample_test/Results/UMAP/UMAP.pdf)
 
 ## 7. Heatmap
 
@@ -168,6 +200,22 @@ NPXplore::npx_pathway_heatmaps(
 )
 ```
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![All-assay heatmap](../../docs/images/examples/Paired_sample_test-7-0.png)](../../example/Paired_sample_test/Results/Heatmap/Heatmap_NPX.pdf)
+
+All-assay heatmap · [Open PDF](../../example/Paired_sample_test/Results/Heatmap/Heatmap_NPX.pdf)
+
+[![DEP heatmap](../../docs/images/examples/Paired_sample_test-7-1.png)](../../example/Paired_sample_test/Results/DEPs/DEPs_heatmap.pdf)
+
+DEP heatmap · [Open PDF](../../example/Paired_sample_test/Results/DEPs/DEPs_heatmap.pdf)
+
+[![Example pathway: Autophagy](../../docs/images/examples/Paired_sample_test-7-2.png)](../../example/Paired_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf)
+
+Example pathway: Autophagy · [Open PDF](../../example/Paired_sample_test/Results/DEPs/Heatmap_Pathway/Heatmap_DEPs_Autophagy.pdf)
+
 ## 8. Boxplot for each Assays
 
 Save individual plots for all assays. This can take considerable time on large panels.
@@ -180,6 +228,18 @@ NPXplore::npx_dep_boxplot(
 ```
 
 To save only DEP assays instead, add `assays = analysis$deps$Assay` to the call above.
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Example assay: ANKZF1](../../docs/images/examples/Paired_sample_test-8-0.png)](../../example/Paired_sample_test/Results/DEPs/Boxplot/ANKZF1_boxplot.pdf)
+
+Example assay: ANKZF1 · [Open PDF](../../example/Paired_sample_test/Results/DEPs/Boxplot/ANKZF1_boxplot.pdf)
+
+[![Example assay: CDC37](../../docs/images/examples/Paired_sample_test-8-1.png)](../../example/Paired_sample_test/Results/DEPs/Boxplot/CDC37_boxplot.pdf)
+
+Example assay: CDC37 · [Open PDF](../../example/Paired_sample_test/Results/DEPs/Boxplot/CDC37_boxplot.pdf)
 
 ## 9. Gene Ontology analysis
 
@@ -198,6 +258,18 @@ functional$diagnostics
 
 The diagnostics distinguish empty inputs, no significant terms, server/query errors, and output errors.
 
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![Up-regulated DEPs: biological process](../../docs/images/examples/Paired_sample_test-9-0.png)](../../example/Paired_sample_test/Results/GeneOntology/up_regulated_GO_Biological_Process.pdf)
+
+Up-regulated DEPs: biological process · [Open PDF](../../example/Paired_sample_test/Results/GeneOntology/up_regulated_GO_Biological_Process.pdf)
+
+[![Down-regulated DEPs: biological process](../../docs/images/examples/Paired_sample_test-9-1.png)](../../example/Paired_sample_test/Results/GeneOntology/down_regulated_GO_Biological_Process.pdf)
+
+Down-regulated DEPs: biological process · [Open PDF](../../example/Paired_sample_test/Results/GeneOntology/down_regulated_GO_Biological_Process.pdf)
+
 ## 10. Protein-Protein Interaction
 
 Create and save STRING networks for all DEPs. Pathway networks use the same annotation as the pathway heatmaps.
@@ -214,3 +286,16 @@ ppi$summary
 All-DEP and pathway networks color nodes by Log2FC.
 
 Networks and node/edge tables are saved under `Results/STRING_PPI`; pathway outputs are under `Results/STRING_PPI/Pathways`. The summary distinguishes insufficient mapping, absent interactions, query failures, and export failures.
+
+### Example outputs
+
+Selected figures from the demo pipeline run. Click a preview or the PDF link to open the original output. Results depend on the data and analysis settings.
+
+[![All-DEP STRING network](../../docs/images/examples/Paired_sample_test-10-0.png)](../../example/Paired_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf)
+
+All-DEP STRING network · [Open PDF](../../example/Paired_sample_test/Results/STRING_PPI/ALL_DEPs_STRING.pdf)
+
+[![Example pathway STRING network: Autophagy](../../docs/images/examples/Paired_sample_test-10-1.png)](../../example/Paired_sample_test/Results/STRING_PPI/Pathways/Autophagy/Autophagy_DEPs_STRING.pdf)
+
+Example pathway STRING network: Autophagy · [Open PDF](../../example/Paired_sample_test/Results/STRING_PPI/Pathways/Autophagy/Autophagy_DEPs_STRING.pdf)
+
