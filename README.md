@@ -29,6 +29,7 @@ Install the CRAN dependencies in R:
 ```r
 install.packages(c(
   "OlinkAnalyze", "dplyr", "readxl", "tibble", "tidyr",
+  "broom", "car", "emmeans",
   "enrichR", "openxlsx", "ggplot2", "ggraph", "htmlwidgets",
   "ggtext", "scales", "pheatmap", "plotly", "igraph",
   "umap", "visNetwork", "NbClust", "knitr", "markdown", "testthat"
