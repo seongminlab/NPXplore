@@ -4,7 +4,6 @@
 .Ruserdata
 .Rproj.user/
 *.Rcheck/
-*.tar.gz
 Rplots.pdf
 output*/
 NPXplore_output*/
