@@ -12,6 +12,8 @@ NPXplore is an R package for analyzing Olink Explore HT protein expression data.
 It combines quality control, differential expression testing, visualization, clustering, and functional analysis in one workflow.
 Use the complete pipeline for a quick analysis or run public functions individually for greater control.
 
+Browse example analysis exports in the [NPXplore-examples repository](https://github.com/seongminlab/NPXplore-examples). Download the example files [here](https://github.com/seongminlab/NPXplore-examples/archive/refs/heads/main.zip).
+
 <br>
 
 ## 1. Requirements
@@ -52,28 +54,22 @@ GO/KEGG analysis requires an internet connection to Enrichr and submits selected
 
 <br>
 
-### Install with remotes
+### Install with pak
 
 ```r
-install.packages("remotes")
-remotes::install_github(
-  "seongminlab/NPXplore",
-  dependencies = TRUE, build_vignettes = TRUE
-)
+install.packages("pak")
+pak::pak("seongminlab/NPXplore")
 ```
 
 <br>
 
 ### Install with devtools
 
-Use this as an alternative to remotes:
+Use this as an alternative to pak:
 
 ```r
 install.packages("devtools")
-devtools::install_github(
-  "seongminlab/NPXplore",
-  dependencies = TRUE, build_vignettes = TRUE
-)
+devtools::install_github("seongminlab/NPXplore")
 ```
 
 
@@ -91,7 +87,7 @@ cd NPXplore
 To install this local checkout, start R from the repository root:
 
 ```r
-remotes::install_local("./NPXplore", dependencies = TRUE, build_vignettes = TRUE)
+devtools::install_local(".")
 ```
 
 The `example/` directory is included in the GitHub checkout. It is excluded from the installed R package to avoid bundling the large input file; clone or download the repository to follow the examples.
