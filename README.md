@@ -100,23 +100,26 @@ The `example/` directory is included in the GitHub checkout. It is excluded from
 
 Start a fresh R session after installation. Run the following code from the repository root, where the `example/` directory is located.
 
-```r
-library(NPXplore)
 
-data <- OlinkAnalyze::read_npx("example/NPXfile.parquet")
-meta <- read.csv("example/metadata.csv", check.names = FALSE)
-```
 
 <br>
 
 ### Two groups: Condition
 
 ```r
+library(NPXplore)
+
+data <- OlinkAnalyze::read_npx("NPXplore/example/npxfile.parquet")
+meta <- read.csv("example/metadata_HC_vs_Cancer.csv")
+```
+<br>
+
+```r
 result_condition <- NPXplore::npx_pipeline(
   data_file = data,
   meta_file = meta,
   variable = "Condition",
-  output_dir = "output_Condition"
+  output_dir = "output_dir"
 )
 ```
 
@@ -126,16 +129,25 @@ result_condition <- NPXplore::npx_pipeline(
 
 ### Multiple groups: Group
 
+
+```r
+library(NPXplore)
+
+data <- OlinkAnalyze::read_npx("NPXplore/example/npxfile.parquet")
+meta <- read.csv("example/metadata_human_dilute.csv")
+```
+<br>
+
 ```r
 result_group <- NPXplore::npx_pipeline(
   data_file = data,
   meta_file = meta,
   variable = "Group",
-  output_dir = "output_Group"
+  output_dir = "output_dir"
 )
 ```
 
-`Group` contains **Healthy**, **Group_1**, and **Group_2**. The default analysis is ANOVA, followed by post-hoc testing and DEP clustering.
+`Group` contains **Control**, **Dilute_1**, **Dilute_2**, **Dilute_3**, **Dilute_4**, **Dilute_5**, **Dilute_6**, **Dilute_7**, **Dilute_8**, and **Dilute_9**. The default analysis is ANOVA, followed by post-hoc testing and DEP clustering.
 
 Both examples use the package defaults: retain WARN samples, exclude final FAIL samples, select DEPs with adjusted p-value < 0.05, and run GO/KEGG and STRING PPI. All assay boxplots are saved, which can take considerable time. Console messages report stage starts, outcomes, and final completion.
 
@@ -150,7 +162,7 @@ result_strict <- NPXplore::npx_pipeline(
   variable = "Condition",
   logFC = 1,
   adj.p = 0.01,
-  output_dir = "output_Condition_strict"
+  output_dir = "output_dir"
 )
 ```
 
@@ -166,7 +178,7 @@ result_wilcox <- NPXplore::npx_pipeline(
   meta_file = meta,
   variable = "Condition",
   test = "wilcox",
-  output_dir = "output_Condition_wilcox"
+  output_dir = "output_dir"
 )
 ```
 

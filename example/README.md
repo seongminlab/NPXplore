@@ -2,10 +2,11 @@
 
 Run the README and tutorials from the NPXplore repository root.
 
-- `NPXfile.parquet`: example Olink Explore HT NPX measurements.
-- `metadata.csv`: metadata linked by `SampleID`.
-- `Condition`: Healthy (23 samples), Disease (149 samples).
-- `Group`: Healthy (23 samples), Group_1 (66 samples), Group_2 (83 samples).
-- Other metadata columns: `Age`, `Sex`, `Treatment`, `exposure`.
+- `npxfile.parquet`: example Olink Explore HT NPX measurements outpur file by NPX MAP. Data from PRIDE Accession No. PAD000002
+- `metadata_HC_vs_Cancer.csv`: metadata linked by `SampleID`.
+- `Condition`: Healthy (22 samples), Cancer (21 samples).
+
+- `metadata_human_dilute.csv`: metadata linked by `SampleID`.
+- `Group`: 3 samples for each human serum dilute.
 
 These counts describe input metadata before QC. The original input files are preserved.
