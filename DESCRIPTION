@@ -8,14 +8,16 @@ Maintainer: Seongmin Cheon <seongmin@knuh.kr>
 Description: Provides a reproducible pipeline for reading and cleaning Olink NPX data,
     joining metadata, generating QC summaries, and selecting two-condition or
     multi-condition analyses.
+URL: https://github.com/seongminlab/NPXplore
+BugReports: https://github.com/seongminlab/NPXplore/issues
 License: AGPL-3
 Encoding: UTF-8
 Depends:
-    R (>= 4.1.0)
+    R (>= 4.5.0)
 Roxygen: list(markdown = TRUE)
 Imports:
     dplyr,
-    OlinkAnalyze,
+    OlinkAnalyze (>= 5.0.2),
     readxl,
     tibble,
     tidyr
@@ -34,7 +36,7 @@ Suggests:
     plotly,
     igraph,
     STRINGdb,
-    testthat (>= 3.0.0),
+    testthat (>= 3.2.1),
     umap,
     visNetwork,
     NbClust

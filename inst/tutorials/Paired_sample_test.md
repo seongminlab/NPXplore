@@ -16,7 +16,7 @@ Read NPX measurements and metadata. The package supplies the default HT annotati
 ```r
 inputs <- NPXplore::npx_read_files(
   data_file = "example/NPXfile.parquet",
-  meta_file = "example/metadata.csv"
+  meta_file = "example/metadata_HC_vs_Cancer.csv"
 )
 ```
 

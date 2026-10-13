@@ -18,13 +18,13 @@ Browse example analysis exports in the [NPXplore-examples repository](https://gi
 
 ## 1. Requirements
 
-The package declares R >= 4.1.0; the release was tested with R 4.5.2. Dependencies may require a newer R version than the package minimum.
+The supported R series is 4.5 and later (`R >= 4.5.0`), with OlinkAnalyze >= 5.0.2. Local release validation uses R 4.5.2; CI checks R 4.5.0 and the current R release. Earlier R versions are outside this release support policy. Dependency versions are recorded in each check.
 
 **Core dependencies:** `OlinkAnalyze`, `dplyr`, `readxl`, `tibble`, `tidyr`.
 
 **Full analysis and visualization:** `enrichR`, `openxlsx`, `ggplot2`, `ggraph`, `htmlwidgets`, `ggtext`, `scales`, `pheatmap`, `plotly`, `igraph`, `STRINGdb`, `umap`, `visNetwork`, `NbClust`.
 
-**Documentation and testing:** `knitr`, `markdown`, `testthat` (>= 3.0.0).
+**Documentation and testing:** `knitr`, `markdown`, `testthat` (>= 3.2.1).
 
 Install the CRAN dependencies in R:
 
@@ -53,6 +53,8 @@ GO/KEGG analysis requires an internet connection to Enrichr and submits selected
 ## 2. Installation
 
 <br>
+
+The commands below install the development version from `main`. Install the full-analysis dependencies in section 1 before running the complete pipeline, including STRINGdb via Bioconductor.
 
 ### Install with pak
 
@@ -87,12 +89,12 @@ cd NPXplore
 To install this local checkout, start R from the repository root:
 
 ```r
-devtools::install_local(".")
+devtools::install_local(".", build_vignettes = TRUE)
 ```
 
 The `example/` directory is included in the GitHub checkout. It is excluded from the installed R package to avoid bundling the large input file; clone or download the repository to follow the examples.
 
-> **Caution:** The `example/NPXfile.parquet` file contains artificially generated data and must not be used for research. The information in `example/metadata.csv` is demo data and does not represent real individuals or actual observations.
+> **Caution:** The `example/NPXfile.parquet` file contains artificially generated data and must not be used for research. The information in `example/metadata_HC_vs_Cancer.csv` and `example/metadata_human_dilute.csv` is demo data and does not represent real individuals or actual observations.
 
 <br>
 
@@ -109,21 +111,21 @@ Start a fresh R session after installation. Run the following code from the repo
 ```r
 library(NPXplore)
 
-data <- OlinkAnalyze::read_npx("NPXplore/example/npxfile.parquet")
-meta <- read.csv("example/metadata_HC_vs_Cancer.csv")
+data <- OlinkAnalyze::read_npx("example/NPXfile.parquet")
+meta_condition <- read.csv("example/metadata_HC_vs_Cancer.csv")
 ```
 <br>
 
 ```r
 result_condition <- NPXplore::npx_pipeline(
   data_file = data,
-  meta_file = meta,
+  meta_file = meta_condition,
   variable = "Condition",
-  output_dir = "output_dir"
+  output_dir = "output_Condition"
 )
 ```
 
-`Condition` contains **Healthy** and **Disease**. The default analysis is an independent t-test, with Log2FC expressed as Disease minus Healthy.
+`Condition` contains **Healthy** and **Cancer**. The default analysis is an independent t-test, with Log2FC expressed as Cancer minus Healthy.
 
 <br>
 
@@ -133,17 +135,17 @@ result_condition <- NPXplore::npx_pipeline(
 ```r
 library(NPXplore)
 
-data <- OlinkAnalyze::read_npx("NPXplore/example/npxfile.parquet")
-meta <- read.csv("example/metadata_human_dilute.csv")
+data <- OlinkAnalyze::read_npx("example/NPXfile.parquet")
+meta_group <- read.csv("example/metadata_human_dilute.csv")
 ```
 <br>
 
 ```r
 result_group <- NPXplore::npx_pipeline(
   data_file = data,
-  meta_file = meta,
+  meta_file = meta_group,
   variable = "Group",
-  output_dir = "output_dir"
+  output_dir = "output_Group"
 )
 ```
 
@@ -158,11 +160,11 @@ Both examples use the package defaults: retain WARN samples, exclude final FAIL 
 ```r
 result_strict <- NPXplore::npx_pipeline(
   data_file = data,
-  meta_file = meta,
+  meta_file = meta_condition,
   variable = "Condition",
   logFC = 1,
   adj.p = 0.01,
-  output_dir = "output_dir"
+  output_dir = "output_Strict"
 )
 ```
 
@@ -175,14 +177,14 @@ The current API applies **absolute Log2FC >= 1** and **adjusted p-value < 0.01**
 ```r
 result_wilcox <- NPXplore::npx_pipeline(
   data_file = data,
-  meta_file = meta,
+  meta_file = meta_condition,
   variable = "Condition",
   test = "wilcox",
-  output_dir = "output_dir"
+  output_dir = "output_Wilcox"
 )
 ```
 
-This runs an independent-sample Wilcoxon test on Healthy and Disease. For matched samples, provide `pair_id` with a genuine subject identifier present in the metadata; the example metadata does not supply a pairing identifier.
+This runs an independent-sample Wilcoxon test on Healthy and Cancer. For matched samples, provide `pair_id` with a genuine subject identifier present in the metadata; the example metadata does not supply a pairing identifier.
 
 Each output directory contains `metadata_used.csv`, `QCreport_metadata.csv`, `Results/`, `QC/`, `Tables/`, and `log/`. GO outputs are under `Results/GeneOntology`; PPI outputs are under `Results/STRING_PPI`.
 
@@ -195,7 +197,13 @@ Each output directory contains `metadata_used.csv`, `QCreport_metadata.csv`, `Re
 
 Both tutorials follow the analysis and export sequence: input, QC, NPX tables, statistics, clustering where applicable, UMAP, heatmaps, individual boxplots, GO/KEGG, and PPI.
 
-Open the installed HTML vignettes in R:
+To install the HTML vignettes as well, install `knitr` and `markdown`, then use:
+
+```r
+devtools::install_github("seongminlab/NPXplore", build_vignettes = TRUE)
+```
+
+The default GitHub installation does not build vignettes. Open them after the documentation-enabled installation:
 
 ```r
 vignette("Paired_sample_test", package = "NPXplore")
@@ -204,7 +212,30 @@ vignette("multiple_group_sample_test", package = "NPXplore")
 
 <br>
 
-## 5. SessionInfo
+## 5. Release validation
+
+From the repository root, after installing the dependencies:
+
+```r
+testthat::test_local()
+rcmdcheck::rcmdcheck(args = "--as-cran", error_on = "warning")
+```
+
+Install the developer tools first with `install.packages(c("rcmdcheck", "pkgload"))`. CI runs package checks on Linux, macOS, and Windows and retains check logs. Vignette code is displayed with `eval=FALSE`; building the documents does not execute the analysis. Run the checkout example smoke check separately:
+
+```sh
+Rscript tools/check-examples.R
+```
+
+This validates both example inputs, QC, and statistical analyses without querying Enrichr or STRING. Full network analysis requires a separate online run and inspection of stage diagnostics.
+
+See [NEWS.md](NEWS.md) for changes and [the release checklist](docs/RELEASING.md) for the tag and source-package procedure. After `v1.0.0` is published, install that fixed version with:
+
+```r
+devtools::install_github("seongminlab/NPXplore@v1.0.0", build_vignettes = TRUE)
+```
+
+## 6. SessionInfo
 
 Inspect your own analysis environment with:
 
