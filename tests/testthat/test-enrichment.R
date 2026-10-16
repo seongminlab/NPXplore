@@ -215,7 +215,10 @@ test_that("GO results and diagnostics respect the v0.2.0 output layout", {
   result <- npx_functional_analysis(list(method = "ttest_independent", levels = c("Healthy", "Disease"),
     deps = data.frame(Assay = "A", Log2FC = 1)), output_dir = out, databases = "test")
   expect_setequal(list.files(out), c("Results", "log"))
-  expect_identical(dirname(result$diagnostics_file), file.path(out, "log"))
+  expect_identical(
+    normalizePath(dirname(result$diagnostics_file), winslash = "/", mustWork = TRUE),
+    normalizePath(file.path(out, "log"), winslash = "/", mustWork = TRUE)
+  )
   expect_true(file.exists(file.path(out, "Results", "GeneOntology", "GeneOntology_up_regulated.xlsx")))
   expect_true(file.exists(file.path(out, "log", "GeneOntology_up_regulated_diagnostics.csv")))
 })

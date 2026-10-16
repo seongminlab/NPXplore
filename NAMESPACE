@@ -34,3 +34,7 @@ export(npx_read_files)
 export(npx_apply_qc)
 export(npx_export_tables)
 export(npx_save_plot)
+
+importFrom(broom,tidy)
+importFrom(car,Anova)
+importFrom(emmeans,emmeans)

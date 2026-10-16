@@ -16,7 +16,10 @@ Depends:
     R (>= 4.5.0)
 Roxygen: list(markdown = TRUE)
 Imports:
+    broom,
+    car,
     dplyr,
+    emmeans,
     OlinkAnalyze (>= 5.0.2),
     readxl,
     tibble,

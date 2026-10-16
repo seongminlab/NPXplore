@@ -95,7 +95,10 @@ test_that("pipeline retains diagnostics after failed posthoc and insufficient cl
   expect_true(file.exists(result$output_files$functional_status))
   expect_equal(nrow(read.csv(result$output_files$anova_posthoc)), 0)
   expect_setequal(list.files(out), c("metadata_used.csv", "QCreport_metadata.csv", "Results", "QC", "Tables", "log"))
-  expect_identical(dirname(result$output_files$functional_status), file.path(out, "log"))
+  expect_identical(
+    normalizePath(dirname(result$output_files$functional_status), winslash = "/", mustWork = TRUE),
+    normalizePath(file.path(out, "log"), winslash = "/", mustWork = TRUE)
+  )
   expect_true(file.exists(result$output_files$session_info))
   expect_match(paste(readLines(result$output_files$run_log), collapse = "\n"), "posthoc unavailable")
   messages <- paste(readLines(result$output_files$run_log), collapse = "\n")

@@ -94,8 +94,6 @@ devtools::install_local(".", build_vignettes = TRUE)
 
 The `example/` directory is included in the GitHub checkout. It is excluded from the installed R package to avoid bundling the large input file; clone or download the repository to follow the examples.
 
-> **Caution:** The `example/NPXfile.parquet` file contains artificially generated data and must not be used for research. The information in `example/metadata_HC_vs_Cancer.csv` and `example/metadata_human_dilute.csv` is demo data and does not represent real individuals or actual observations.
-
 <br>
 
 ## 3. Quick start

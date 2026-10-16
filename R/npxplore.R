@@ -1,3 +1,7 @@
+# Statistical backends required by the OlinkAnalyze wrappers.
+#' @importFrom broom tidy
+#' @importFrom car Anova
+#' @importFrom emmeans emmeans
 #' @importFrom dplyr .data
 #' @importFrom dplyr any_of
 NULL
