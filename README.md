@@ -12,13 +12,15 @@ NPXplore is an R package for analyzing Olink Explore HT protein expression data.
 It combines quality control, differential expression testing, visualization, clustering, and functional analysis in one workflow.
 Use the complete pipeline for a quick analysis or run public functions individually for greater control.
 
+The examples use publicly deposited experimental Olink Explore HT NPX measurements from [PRIDE accession PAD000002](https://www.ebi.ac.uk/pride/archive/projects/PAD000002), associated with [Beimers et al., *Technical Evaluation of Plasma Proteomics Technologies*](https://doi.org/10.1021/acs.jproteome.5c00221). Repository-supplied metadata select the healthy/cancer and plasma dilution subsets for demonstrating NPXplore. The exported results reflect NPXplore’s documented inputs, QC rules, and statistical settings; they constitute a separate reanalysis from the original publication.
+
 Browse example analysis exports in the [NPXplore-examples repository](https://github.com/seongminlab/NPXplore-examples). Download the example files [here](https://github.com/seongminlab/NPXplore-examples/archive/refs/heads/main.zip).
 
 <br>
 
 ## 1. Requirements
 
-The supported R series is 4.5 and later (`R >= 4.5.0`), with OlinkAnalyze >= 5.0.2. Local release validation uses R 4.5.2; CI checks R 4.5.0 and the current R release. Earlier R versions are outside this release support policy. Dependency versions are recorded in each check.
+NPXplore supports Windows, macOS, and Linux. The supported R series is 4.5 and later (`R >= 4.5.0`), with OlinkAnalyze >= 5.0.2. CI checks R 4.5.0 and the current R release. Earlier R versions are outside this release support policy. Dependency versions are recorded in each check.
 
 **Core dependencies:** `OlinkAnalyze`, `dplyr`, `readxl`, `tibble`, `tidyr`.
 
@@ -219,80 +221,28 @@ testthat::test_local()
 rcmdcheck::rcmdcheck(args = "--as-cran", error_on = "warning")
 ```
 
-Install the developer tools first with `install.packages(c("rcmdcheck", "pkgload"))`. CI runs package checks on Linux, macOS, and Windows and retains check logs. Vignette code is displayed with `eval=FALSE`; building the documents does not execute the analysis. Run the checkout example smoke check separately:
+Install the developer tools first with `install.packages(c("rcmdcheck", "pkgload"))`. CI is configured to check the package on Windows, macOS, and Linux and retain check logs. Vignette code is displayed with `eval=FALSE`; building the documents does not execute the analysis. Run the checkout example smoke check separately:
 
 ```sh
 Rscript tools/check-examples.R
 ```
 
-This validates both example inputs, QC, and statistical analyses without querying Enrichr or STRING. Full network analysis requires a separate online run and inspection of stage diagnostics.
+This validates both example inputs, QC, and statistical analyses without querying Enrichr or STRING. With the supplied inputs and defaults, the two-group comparison yields **1,157 DEPs** and the multi-group comparison **2,634 DEPs** from 5,415 tested assays each. FAIL samples, including O5-25, are excluded; WARN samples are retained.
 
-See [NEWS.md](NEWS.md) for changes and [the release checklist](docs/RELEASING.md) for the tag and source-package procedure. After `v1.0.0` is published, install that fixed version with:
+Regenerate all reference exports from the current checkout into a new directory, then compare their metadata and numerical results against a fresh default analysis:
+
+```sh
+Rscript tools/regenerate-examples.R ../NPXplore-reference
+Rscript tools/check-examples.R ../NPXplore-reference
+```
+
+The full run saves all assay boxplots and queries Enrichr and STRING. It can take hours. Each run records the package version, Git base commit and working-tree state, source/input SHA-256 hashes, actual default parameters, sample membership, result counts, and stage diagnostics under `log/`. These identify the exact source and inputs even when the checkout has uncommitted revisions. External service results depend on the database versions available at run time.
+
+See [NEWS.md](NEWS.md) for changes and [release validation](docs/RELEASE-VALIDATION.md) for the current inputs, default-result counts, and verification evidence. After `v1.0.0` is published, install that fixed version with:
 
 ```r
 devtools::install_github("seongminlab/NPXplore@v1.0.0", build_vignettes = TRUE)
 ```
-
-## 6. SessionInfo
-
-Inspect your own analysis environment with:
-
-```r
-sessionInfo()
-```
-
-Package: **NPXplore_1.0.0**, R 4.5.2, macOS Tahoe 26.5.2 (Apple Silicon).
-
-[Full environment and package versions](docs/SessionInfo.txt)
-
-<details>
-<summary>View environment and package versions</summary>
-
-```text
-R version 4.5.2 (2025-10-31)
-Platform: aarch64-apple-darwin20
-Running under: macOS Tahoe 26.5.2
-
-Matrix products: default
-BLAS: Apple Accelerate (library path omitted)
-LAPACK: R bundled LAPACK; LAPACK version 3.12.1 (library path omitted)
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-time zone: Asia/Seoul
-tzcode source: internal
-
-Base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base
-
-NPXplore release:
-[1] NPXplore_1.0.0
-
-Dependency versions:
-  [1] DBI_1.3.0           bitops_1.1-0        gridExtra_2.3.1     readxl_1.5.0        rlang_1.3.0         magrittr_2.0.5      otel_0.2.0
-  [8] compiler_4.5.2      RSQLite_3.53.3      systemfonts_1.3.2   png_0.1-9           vctrs_0.7.3         stringr_1.6.0       pkgconfig_2.0.3
- [15] fastmap_1.2.0       backports_1.5.1     dbplyr_2.6.0        labeling_0.4.3      ggraph_2.2.2        caTools_1.18.4      rmarkdown_2.31
- [22] markdown_2.0        ragg_1.5.2          purrr_1.2.2         bit_4.6.0           xfun_0.60           WriteXLS_6.8.0      cachem_1.1.0
- [29] litedown_0.11       jsonlite_2.0.0      blob_1.3.0          tweenr_2.0.3        broom_1.0.13        R6_2.6.1            stringi_1.8.9
- [36] RColorBrewer_1.1-3  reticulate_1.46.0   car_3.1-5           cellranger_1.1.0    estimability_2.0.0  Rcpp_1.1.2          assertthat_0.2.1
- [43] knitr_1.51          Matrix_1.7-6        igraph_2.3.3        tidyselect_1.2.1    yaml_2.3.12         rstudioapi_0.19.0   abind_1.4-8
- [50] viridis_0.6.5       ggtext_0.1.2        enrichR_3.4         gplots_3.3.0        curl_8.0.0          lattice_0.23-1      tibble_3.3.1
- [57] plyr_1.8.9          withr_3.0.3         S7_0.2.2            askpass_1.2.1       evaluate_1.0.5      polyclip_1.10-7     zip_3.0.2
- [64] xml2_1.6.0          pillar_1.11.1       carData_3.0-6       KernSmooth_2.23-27  plotly_4.12.1       generics_0.1.4      ggplot2_4.0.3
- [71] commonmark_2.0.0    scales_1.4.0        xtable_1.8-8        chron_2.3-63        gtools_3.9.5        glue_1.8.1          pheatmap_1.0.13
- [78] emmeans_2.0.4       tools_4.5.2         data.table_1.18.6.1 RSpectra_0.16-2     openxlsx_4.2.8.1    gsubfn_0.7          visNetwork_2.1.4
- [85] mvtnorm_1.4-2       graphlayouts_1.2.5  tidygraph_1.3.1     grid_4.5.2          plotrix_3.8-14      tidyr_1.3.2         crosstalk_1.2.2
- [92] umap_0.2.10.0       duckdb_1.5.5        ggforce_0.5.0       proto_1.0.0         Formula_1.2-6       cli_3.6.6           textshaping_1.0.5
- [99] NbClust_3.0.1       sqldf_0.4-12        viridisLite_0.4.3   arrow_25.0.1        dplyr_1.2.1         gtable_0.3.6        hash_2.2.6.4
-[106] digest_0.6.39       OlinkAnalyze_5.0.2  ggrepel_0.9.8       rjson_0.2.23        STRINGdb_2.22.0     htmlwidgets_1.6.4   farver_2.1.2
-[113] memoise_2.0.1       htmltools_0.5.9     lifecycle_1.0.5     httr_1.4.8          gridtext_0.1.6      openssl_2.4.2       bit64_4.8.4
-[120] MASS_7.3-66
-```
-
-</details>
-
-<br>
 
 ## License
 

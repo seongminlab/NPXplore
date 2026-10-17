@@ -1,27 +1,21 @@
 # NPXplore 1.0.0
 
-Initial public release candidate.
-
 * Read Olink Explore HT NPX data, join metadata, and report sample/assay QC.
 * Run independent or paired two-group tests, ANOVA and post-hoc analysis,
   DEP selection, and multi-group clustering.
 * Export tables, static and interactive visualizations, GO/KEGG enrichment,
   and STRING protein interaction networks with stage diagnostics.
 * Correct checkout example paths and document optional vignette installation.
-* Support R 4.5 and later (locally checked on 4.5.2) and OlinkAnalyze
-  5.0.2 and later; require
-  testthat 3.2.1 for tests that mock non-function objects.
-* Add cross-platform package checks and an offline example smoke check.
 
-## Limitations
+* Remove the misspelled `npx_wilcon` alias and preserve the canonical
+  `npx_wilcox` implementation and export.
+* Regenerate reference exports with default QC and current input metadata;
+  exclude final FAIL samples and retain WARN samples. Validate metadata,
+  NPX sample columns, statistical tables, and DEP membership against fresh
+  default analyses (Condition: 1,157 DEPs; Group: 2,634 DEPs).
+* Add reproducible export/check scripts with Git base commit, working-tree
+  state, source/input SHA-256 hashes, parameters, and session information.
 
-* Demo inputs are artificial and are not suitable for research.
-* Large demo inputs are distributed in the GitHub checkout, not the R package.
-* GO/KEGG requires Enrichr access and submits selected protein identifiers;
-  STRING PPI downloads external reference data. Offline tests use mocks and
-  do not establish availability of these services.
-* Covariates are supported for ANOVA only; paired tests require a real pairing
-  identifier, which is absent from the demonstration metadata.
-* Vignette chunks are not evaluated during document builds. Full-pipeline
-  exports may be slow; some HTML exports need accompanying dependency folders
-  when a self-contained export cannot be produced.
+## Example data provenance
+
+The examples use publicly deposited experimental Olink Explore HT NPX measurements from [PRIDE accession PAD000002](https://www.ebi.ac.uk/pride/archive/projects/PAD000002), associated with [Beimers et al., *Technical Evaluation of Plasma Proteomics Technologies*](https://doi.org/10.1021/acs.jproteome.5c00221). Repository-supplied metadata select the healthy/cancer and plasma dilution subsets for demonstrating NPXplore. The exported results reflect NPXplore’s documented inputs, QC rules, and statistical settings; they constitute a separate reanalysis from the original publication.

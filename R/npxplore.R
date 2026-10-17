@@ -468,11 +468,6 @@ npx_wilcox <- function(data, variable = "Condition", pair_id = NULL,
                         require_effect = TRUE)
 }
 
-#' Backward-compatible alias for [npx_wilcox()].
-#' @param ... Arguments passed to [npx_wilcox()].
-#' @export
-npx_wilcon <- function(...) npx_wilcox(...)
-
 #' Calculate multi-condition differential proteins with one-way ANOVA
 #' @param data Prepared assay data.
 #' @param variable Metadata column used as the grouping variable.

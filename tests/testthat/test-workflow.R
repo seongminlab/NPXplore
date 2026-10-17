@@ -22,6 +22,39 @@ test_that("public QC preparation preserves original failures and metadata scope"
   expect_error(npx_apply_qc(inputs, qc), "missing original sample")
 })
 
+test_that("pipeline default exports exclude final FAIL samples and preserve input labels", {
+  d <- runtime_fixture()
+  d <- d[d$Condition != "Followup", ]
+  meta <- unique(d[c("SampleID", "Condition")])
+  d$Condition <- NULL
+  d$Block <- rep(c(1, 2), length.out = nrow(d))
+  d$SampleQC[d$SampleID == "S1"] <- "FAIL"
+  d$SampleQC[d$SampleID == "S2"] <- "WARN"
+  local_mocked_bindings(
+    npx_clean = function(data) list(data = data, check_log = NULL, check_log_clean = NULL),
+    npx_umap = function(...) NULL, npx_iqrplot = function(...) NULL,
+    npx_distribution_boxplot = function(...) NULL, npx_heatmap = function(...) NULL,
+    npx_volcano = function(...) NULL,
+    npx_dep_boxplot = function(...) list(status = "Success", files = character())
+  )
+  out <- tempfile()
+  result <- npx_pipeline(d, meta, output_dir = out, run_functional_analysis = FALSE)
+  used <- read.csv(file.path(out, "metadata_used.csv"))
+  expect_false("S1" %in% result$data$SampleID)
+  expect_false("S1" %in% used$SampleID)
+  expect_false(any(used$QC == "FAIL"))
+  expect_true("S2" %in% used$SampleID)
+  expect_identical(used$Condition, meta$Condition[match(used$SampleID, meta$SampleID)])
+  expect_setequal(used$SampleID, result$data$SampleID)
+  expect_setequal(read.csv(file.path(out, "QCreport_metadata.csv"))$SampleID, used$SampleID)
+  expect_setequal(names(read.csv(file.path(out, "Tables", "1.NPX_table.csv"))),
+                  c("Assay", used$SampleID))
+  qc <- read.csv(file.path(out, "QC", "4.Report_SampleQC.csv"))
+  expect_identical(qc$QC[qc$SampleID == "S1"], "FAIL")
+  included <- npx_pipeline(d, meta, include_fail = TRUE, output_dir = NULL)
+  expect_true("S1" %in% included$data$SampleID)
+})
+
 test_that("public exports impute only the saved matrix and preserve statistical tables", {
   d <- runtime_fixture()
   d <- d[d$Condition != "Followup", ]

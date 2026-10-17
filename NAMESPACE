@@ -27,7 +27,6 @@ export(npx_umap)
 export(npx_volcano)
 export(npx_ttest)
 export(npx_wilcox)
-export(npx_wilcon)
 importFrom(dplyr,.data)
 
 export(npx_read_files)
