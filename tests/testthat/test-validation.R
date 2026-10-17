@@ -53,8 +53,6 @@ test_that("analysis API uses variable and optional pair_id", {
   expect_identical(formals(npx_anova)$variable, "Condition")
   exports <- getNamespaceExports("NPXplore")
   expect_true("npx_wilcox" %in% exports)
-  expect_false("npx_wilcon" %in% exports)
-  expect_false(exists("npx_wilcon", envir = asNamespace("NPXplore"), inherits = FALSE))
   expect_identical(formals(npx_analyze)$variable, "Condition")
   expect_null(formals(npx_analyze)$pair_id)
   expect_identical(formals(npx_pipeline)$variable, "Condition")

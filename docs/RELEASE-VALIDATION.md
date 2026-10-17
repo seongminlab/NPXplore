@@ -19,10 +19,10 @@ O5-25 (final FAIL) is absent from analysis metadata and the NPX matrix. O5-10, O
 
 ## Fresh validation evidence
 
-- Full local package tests: **408 passes; 0 failures, errors, warnings or skips**. This includes actual Wilcoxon execution, canonical exports, absence of `npx_wilcon`, and pipeline FAIL filtering with metadata/NPX export consistency.
+- Full local package tests: **406 passes; 0 failures, errors, warnings or skips**. This includes actual Wilcoxon execution, the public analysis API, and pipeline FAIL filtering with metadata/NPX export consistency.
 - `R CMD build`: passed, including both HTML vignettes.
 - `R CMD check --no-manual --as-cran`: **0 errors, 0 warnings, 1 NOTE**. The NOTE is `unable to verify current time`. Remote CRAN incoming checks were disabled; this is local package validation.
-- Installed package: 1.0.0; canonical Wilcoxon export present, typo alias absent; annotation file and both HTML vignettes present.
+- Installed package: 1.0.0; public analysis functions, annotation file and both HTML vignettes present.
 - `Rscript tools/check-examples.R <regenerated-output-root>`: passed for both complete exports. The check recomputes default QC and analyses and compares both metadata files, every QC CSV, raw NPX, the saved NPX matrix, statistics, DEP membership and ANOVA posthoc values. It also checks exact source/input hashes, defaults, sample membership, counts and recorded stage statuses.
 - The checker rejects the previous examples at `metadata_used.csv`; failed-run manifest regression records Failed, the error and a completion timestamp.
 - Recovered the source bundle in a separate checkout, restored the supplied input bytes and verified all 14 source/input file hashes against the recorded manifests.

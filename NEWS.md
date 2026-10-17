@@ -6,9 +6,6 @@
 * Export tables, static and interactive visualizations, GO/KEGG enrichment,
   and STRING protein interaction networks with stage diagnostics.
 * Correct checkout example paths and document optional vignette installation.
-
-* Remove the misspelled `npx_wilcon` alias and preserve the canonical
-  `npx_wilcox` implementation and export.
 * Regenerate reference exports with default QC and current input metadata;
   exclude final FAIL samples and retain WARN samples. Validate metadata,
   NPX sample columns, statistical tables, and DEP membership against fresh
