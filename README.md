@@ -212,38 +212,6 @@ vignette("multiple_group_sample_test", package = "NPXplore")
 
 <br>
 
-## 5. Release validation
-
-From the repository root, after installing the dependencies:
-
-```r
-testthat::test_local()
-rcmdcheck::rcmdcheck(args = "--as-cran", error_on = "warning")
-```
-
-Install the developer tools first with `install.packages(c("rcmdcheck", "pkgload"))`. CI is configured to check the package on Windows, macOS, and Linux and retain check logs. Vignette code is displayed with `eval=FALSE`; building the documents does not execute the analysis. Run the checkout example smoke check separately:
-
-```sh
-Rscript tools/check-examples.R
-```
-
-This validates both example inputs, QC, and statistical analyses without querying Enrichr or STRING. With the supplied inputs and defaults, the two-group comparison yields **1,157 DEPs** and the multi-group comparison **2,634 DEPs** from 5,415 tested assays each. FAIL samples, including O5-25, are excluded; WARN samples are retained.
-
-Regenerate all reference exports from the current checkout into a new directory, then compare their metadata and numerical results against a fresh default analysis:
-
-```sh
-Rscript tools/regenerate-examples.R ../NPXplore-reference
-Rscript tools/check-examples.R ../NPXplore-reference
-```
-
-The full run saves all assay boxplots and queries Enrichr and STRING. It can take hours. Each run records the package version, Git base commit and working-tree state, source/input SHA-256 hashes, actual default parameters, sample membership, result counts, and stage diagnostics under `log/`. These identify the exact source and inputs even when the checkout has uncommitted revisions. External service results depend on the database versions available at run time.
-
-See [NEWS.md](NEWS.md) for changes and [release validation](docs/RELEASE-VALIDATION.md) for the current inputs, default-result counts, and verification evidence. After `v1.0.0` is published, install that fixed version with:
-
-```r
-devtools::install_github("seongminlab/NPXplore@v1.0.0", build_vignettes = TRUE)
-```
-
 ## License
 
 **AGPL-3.0**. See [LICENSE](LICENSE) for the GNU Affero General Public License, version 3.
